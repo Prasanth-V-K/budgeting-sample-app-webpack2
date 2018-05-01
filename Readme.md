@@ -162,3 +162,108 @@ This project is maintained by [Modus Create](https://moduscreate.com). Fantastic
 
 ## License
 [MIT](License.md)
+
+## Test Plan
+
+### Overview
+Test plan covers the project details, in-scope and out-scope, test scenarios, test cases, test automation and acceptance criteria for the Budgeting app project.
+
+### Documents
+
+Company GitHub page : https://github.com/ModusCreateOrg
+
+Company Website : http://www.moduscreate.com/
+
+### Architecture
+[Budgeting app](https://github.com/ModusCreateOrg/budgeting-sample-app-webpack2) is a project that is developed using modern React. It is a showcase project and can be used as a started kit.
+
+### In Scope
+In scope is the areas that will be impacted by the project. In scope are:
+* Adding a transaction
+* Inflow
+* Outflow
+* Working Balance
+* Reports
+* Charts
+
+### Out of Scope
+Out of scope deals with the areas that are not impacted by the project and they are:
+* Look and feel
+* Any other functionality other than adding an expense to the budget
+
+### Test Scenarios
+A test scenario is a series of actions that are associated together.
+
+* Adding an expense
+* Generating reports
+* Viewing the Spendings by Category
+
+### Test Cases
+A test case is a single thread of action and is derived from the test scenarios.
+
+#### 1. Primary Cases:
+- Navigate to the budgeting app,click on the "Budget" tab and Verify that the UI are as expected
+- Navigate to the budgeting app,click on the "Reports" tab and Verify that the UI are as expected
+
+#### 2. Positive Cases:
+- Navigate to budgeting app, adding an expense like $100, verify if the expense is added and the working balance is updated as expected.
+- Navigate to the budgeting app, clicking on Reports tab, verify that the Reports are displayed as expected.
+- Navigating to the budgeting app, clicking on Reports tab,click on "Spend by Category" and verify that the expenses are displayed properly.
+
+#### 3. Negative Cases:
+- Navigate to budgeting app, add an invalid transaction with values like "EEEE", ensure that the transaction cannot be added.
+- Navigate to the budgeting app, add a transaction with value as "-$100", verify that the Amount is still -$100 as there are chance that the app might take it as -(-$100) which is $100
+- Navigate to budgeting app, select any category, enter a description and values like "..............9...............", ensure that the transaction is not added.
+
+#### 4. Boundary Cases:
+- Navigate to the budgeting app, select any category, enter a tiny description like "test", enter a value and click on "Add" button. Verify that the trasaction is added successfully.
+- Navigate to the budgeting app, select any category, enter a really large description, enter a value and click on "Add" button. Verify that the transaction is added successfully.
+- Navigate to the budgeting app, select any category, enter a description like "test", enter a value like "1" and click on "Add" button. Verify that the trasaction is added successfully.
+- Navigate to the budgeting app, select any category, enter a description like "test", enter a value like "10000000000000000" and click on "Add" button. Verify that the trasaction is added successfully.
+
+#### 5. Edge Cases:
+- Navigate to the budgeting app, select any category, enter the description like "T!@#$%^&*()", enter any value and click on "Add" button. Verify that the trasaction is added successfully.
+- Navigate to the budgeting app, select any category, enter a description like "TeStInG CaPsLoCK", enter any value and click on "Add" button. Verify that the trasaction is added successfully.
+
+#### 6. Input Output Cases:
+- Navigate to the budgeting app, select any category, enter the description like "<b>Test</b>", enter any value and click on "Add" button. Verify that the trasaction is added successfully and the html characters are escaped properly.
+- Navigate to the budgeting app, select any category, enter the description like "<i>Test</i>", enter any value and click on "Add" button. Verify that the trasaction is added successfully and the html characters are escaped properly.
+- Navigate to the budgeting app, select any category, enter the description with format exploits like "Nice site, I think I'll take it. <script>alert('Executing JS')</script>", enter any value and click on "Add" button. Verify that the trasaction is added successfully and the scripts are escaped properly.
+
+### Test Automation
+
+#### Technology Used:
+- Framework used  : [Watir](http://watir.com/)
+- Language used   : Ruby
+- Browser used    : Chrome
+
+#### Summary:
+- Test cases automated : 5
+- Test cases passing   : 4
+- Test case failing    : 1
+
+#### Test Cases automated:
+- Navigate to the budgeting app,click on the "Budget" tab and Verify that the UI are as expected
+- Navigate to the budgeting app,click on the "Reports" tab and Verify that the UI are as expected
+- Navigate to budgeting app, adding an expense like $100, verify if the expense is added and the working balance is updated as expected.
+- Navigating to the budgeting app, clicking on Reports tab,click on "Spend by Category" and verify that the expenses are displayed properly.
+- Navigate to budgeting app, add an invalid transaction with values like "EEEE", ensure that the transaction cannot be added.
+
+#### Running the tests:
+- Install Ruby, watir, chrome driver
+- Install ruby gems : watir, rack, rack-test, cucumber, bundler, test-unit, page-object
+- cd to the folder e2e/tests
+- Run the tests by the command line:
+    * `ruby addingatransaction.rb`
+    * `ruby addinganinvalidtransaction.rb`
+    * `ruby budgetpagevalidation.rb`
+    * `ruby reportspagevalidation.rb`
+    * `ruby verifyingthetransaction.rb`
+
+
+### QA Acceptance Criteria:
+- All major functions are covered using Unit and Integration tests
+- Dev signoff is complete
+- No critical and pending issues in the project
+- All major E2E cases are automated
+
